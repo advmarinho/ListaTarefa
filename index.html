@@ -2,280 +2,284 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas Cromex</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas Cromex</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      text-align: center;
+    }
 
-        .excluir-todas-tarefas {
-            background-color: #ff4d4d;
-            border: none;
-            color: white;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .excluir-todas-tarefas {
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-        .excluir-todas-tarefas:hover {
-            background-color: #ff3333;
-        }
+    .excluir-todas-tarefas:hover {
+      background-color: #ff3333;
+    }
 
-        .assinatura {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            color: black;
-            font-size: 12px;
-        }
+    .assinatura {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      color: black;
+      font-size: 12px;
+    }
 
-        .todo-section {
-            background-color: #ffffff;
-            margin: 20px auto;
-            width: 80%;
-            max-width: 900px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    .todo-section {
+      background-color: #ffffff;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 1000px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
 
-        #novaTarefaInput,
-        #adicionarTarefaBtn {
-            padding: 10px;
-            margin: 5px 0;
-            border: 2px solid #007bff;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+    #novaTarefaInput,
+    #adicionarTarefaBtn {
+      padding: 10px;
+      margin: 5px 0;
+      border: 2px solid #007bff;
+      border-radius: 4px;
+      font-size: 16px;
+    }
 
-        #novaTarefaInput {
-            width: 70%;
-            margin-right: 10px;
-        }
+    #novaTarefaInput {
+      width: 70%;
+      margin-right: 10px;
+    }
 
-        #adicionarTarefaBtn {
-            width: 25%;
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-            border: none;
-        }
+    #adicionarTarefaBtn {
+      width: 25%;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
 
-        #listaTarefas {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
+    #listaTarefas {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
 
-        #listaTarefas li {
-            background-color: #e7f1ff;
-            margin-bottom: 12px;
-            padding: 10px;
-            border-radius: 4px;
-            display: flex;
-            align-items: flex-start;
-            /* Alterado para flex-start para alinhar o texto à esquerda */
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
+    #listaTarefas li {
+      background-color: #e7f1ff;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: flex-start;
+      /* Alterado para flex-start para alinhar o texto à esquerda */
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
 
-        .texto-tarefa {
-            flex-grow: 1;
-            /* Adicionado para ocupar o espaço disponível */
-            text-align: left;
-            /* Adicionado para alinhar o texto à esquerda */
-        }
+    .texto-tarefa {
+      flex-grow: 1;
+      /* Adicionado para ocupar o espaço disponível */
+      text-align: left;
+      /* Adicionado para alinhar o texto à esquerda */
+    }
 
-        #listaTarefas .checked {
-            text-decoration: line-through;
-        }
+    #listaTarefas .checked {
+      text-decoration: line-through;
+    }
 
-        .tarefa-checkbox {
-            margin-right: 10px;
-        }
+    .tarefa-checkbox {
+      margin-right: 10px;
+    }
 
-        .excluir-tarefa {
-            background-color: #ff4d4d;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .excluir-tarefa {
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        .excluir-tarefa:hover {
-            background-color: #ff3333;
-        }
+    .excluir-tarefa:hover {
+      background-color: #ff3333;
+    }
 
-        .data-conclusao,
-        .observacao {
-            padding: 5px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: calc(50% - 10px);
-        }
+    .data-conclusao,
+    .observacao {
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: calc(50% - 10px);
+    }
 
-        .data-conclusao {
-            width: calc(30% - 10px);
-        }
+    .data-conclusao {
+      width: calc(30% - 10px);
+    }
 
-        .observacao {
-            width: calc(70% - 10px);
-        }
+    .observacao {
+      width: calc(70% - 10px);
+    }
 
-        .botao-exportar {
-            background-color: yellow;
-            color: black;
-            padding: 10px;
-            margin: 5px 0;
-            border: 2px solid #cccccc;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    .botao-exportar {
+      background-color: yellow;
+      color: black;
+      padding: 10px;
+      margin: 5px 0;
+      border: 2px solid #cccccc;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-        .botao-exportar:hover {
-            background-color: #ffff99;
-        }
+    .botao-exportar:hover {
+      background-color: #ffff99;
+    }
 
-        .handle {
-            cursor: grab;
-        }
-    </style>
+    .handle {
+      cursor: grab;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="todo-section">
-        <label for="carregarTarefasFixas">Carregar Tarefas Fixas</label>
-        <input type="checkbox" id="carregarTarefasFixas" />
-
-        <h2>Lista de Tarefas Cromex</h2>
-        <input type="text" id="novaTarefaInput" placeholder="Adicionar nova tarefa...">
-        <button id="adicionarTarefaBtn">Adicionar</button>
-        <button id="excluirTodasTarefasBtn" class="excluir-todas-tarefas">Excluir Todas as Tarefas</button>
-        <button id="exportarTarefasBtn" class="botao-exportar">Exportar Tarefas</button>
-        <ul id="listaTarefas"></ul>
+  <div class="todo-section">
+    <label for="carregarTarefasFixas">Carregar Tarefas Fixas</label>
+    <input type="checkbox" id="carregarTarefasFixas" />
+    <br> Ou <br>
+    <button id="importarTarefasBtn" class="botao-importar">Importar Tarefas</button>
 
 
-
-    </div>
-
-    <div class="assinatura">By Anderson Marinho</div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const adicionarTarefaBtn = document.getElementById('adicionarTarefaBtn');
-            const exportarTarefasBtn = document.getElementById('exportarTarefasBtn');
-            const novaTarefaInput = document.getElementById('novaTarefaInput');
-            const listaTarefas = document.getElementById('listaTarefas');
-            const carregarTarefasFixasCheckbox = document.getElementById('carregarTarefasFixas');
-
-            // Verifica se as tarefas fixas já foram carregadas antes de chamar a função
-            if (carregarTarefasFixasCheckbox.checked && !localStorage.getItem('tarefasFixasCarregadas')) {
-                carregarTarefasFixas(); // Adiciona tarefas mensais fixas
-                localStorage.setItem('tarefasFixasCarregadas', 'true');
-            }
-
-            carregarTarefas(); // Carrega tarefas salvas
+    <h2>Lista de Tarefas Cromex</h2>
+    <input type="text" id="novaTarefaInput" placeholder="Adicionar nova tarefa...">
+    <button id="adicionarTarefaBtn">Adicionar</button>
+    <button id="excluirTodasTarefasBtn" class="excluir-todas-tarefas">Excluir Todas as Tarefas</button>
+    <button id="exportarTarefasBtn" class="botao-exportar">Exportar Tarefas</button>
+    <ul id="listaTarefas"></ul>
 
 
-            adicionarTarefaBtn.addEventListener('click', adicionarTarefaInput);
-            exportarTarefasBtn.addEventListener('click', exportarTarefas);
 
-            novaTarefaInput.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    adicionarTarefaInput();
-                }
-            });
+  </div>
 
-            carregarTarefasFixasCheckbox.addEventListener('change', function () {
-                localStorage.removeItem('tarefasFixasCarregadas'); // Remove a flag ao desmarcar o checkbox
-                if (this.checked) {
-                    carregarTarefasFixas(); // Adiciona tarefas mensais fixas
-                    localStorage.setItem('tarefasFixasCarregadas', 'true');
-                }
-            });
+  <div class="assinatura">By Anderson Marinho</div>
 
-            const sortable = new Sortable(listaTarefas, {
-                animation: 150,
-                handle: '.handle',
-                onEnd: function (evt) {
-                    salvarTarefas();
-                    atualizarNumerosOrdem();
-                },
-            });
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const adicionarTarefaBtn = document.getElementById('adicionarTarefaBtn');
+      const exportarTarefasBtn = document.getElementById('exportarTarefasBtn');
+      const novaTarefaInput = document.getElementById('novaTarefaInput');
+      const listaTarefas = document.getElementById('listaTarefas');
+      const carregarTarefasFixasCheckbox = document.getElementById('carregarTarefasFixas');
 
-            function carregarTarefasFixas() {
-                const tarefasFixas = [
-                    "Contabilização NF e Rateio",
-                    "2012698-_NF CONSIGNADO BB",
-                    "2019054-_NF CONSIGNADO CREDITAS",
-                    "2017004-_NF DROGARIA SÃO PAULO",
-                    "5000000-_NF FGTS",
-                    "2017039-_NF MARES FRETADO",
-                    "2005901-_NF MENSALIDADE SINDICATO SP",
-                    "2017458-_NF NEO TAGUS BA",
-                    "2007872-_NF NEO TAGUS SP",
-                    "2016384-_NF NOTREDAME COPAY",
-                    "2016384-_NF NOTREDAME MENSAL",
-                    "2011857-_NF ODONTO",
-                    "2011116 -_NF OMINT MENSAL",
-                    "2001582-_NF PROMEDICA COPAY",
-                    "2005947-_NF SINDICATO PATRONAL BA",
-                    "2012440-_NF ALELO ALIMENTAÇÃO",
-                    "2012440-_NF ALELO ALIMENTAÇÃO 13SAL BA",
-                    "2012440-_NF ALELO ALIMENTAÇÃO SPOT",
-                    "2012440-_NF ALELO PREMIACAO BA",
-                    "2012440-_NF ALELO REFEIÇÃO",
-                    "2012440-_NF ALELO TRANSPORTES VT",
-                    "2018208-_NF NEXTI PONTO",
-                    "2019127-_NF RECRUTA.AI",
-                    "2017729-_NF SEGURO VIDA BB",
-                    "2019950-_NF CARTÃO CAJU",
-                    "2018057-_NF ACTIVA CRACHÁ",
-                    "2019926-_NF ALEXANDRE REIS",
-                    "2008443-_NF CIA POOL FRETADO",
-                    "2017657 -_NF NEXUS CONFERENCIA",
-                    "2019765-_NF NOVISA FRETADO",
-                    "2000810-_NF NUBE",
-                    "2010931-_NF PEOPLE TO PEOPLE",
-                    "2018335-_NF PJ ADRIANO NUCCI",
-                    "2019547-_NF PJ FELIPE MOTA",
-                    "2018334-_NF PJ LIZARELLI",
-                    "2019899-_NF PJ LUIZ GUSTAVO",
-                    "2019793 -_NF PJ MARCELO ALMEIDA",
-                    "2001438 -_NF SAPORE BA",
-                    "2000493-_NF SAPORE SP",
-                    "2018116 -_NF TMF"
+      // Verifica se as tarefas fixas já foram carregadas antes de chamar a função
+      if (carregarTarefasFixasCheckbox.checked && !localStorage.getItem('tarefasFixasCarregadas')) {
+        carregarTarefasFixas(); // Adiciona tarefas mensais fixas
+        localStorage.setItem('tarefasFixasCarregadas', 'true');
+      }
 
-                ];
+      carregarTarefas(); // Carrega tarefas salvas
 
-                tarefasFixas.forEach(tarefa => adicionarTarefa(tarefa, false, '', ''));
-            }
 
-            function adicionarTarefaInput() {
-                const tarefa = novaTarefaInput.value;
-                if (tarefa) {
-                    adicionarTarefa(tarefa, false, '', '');
-                    salvarTarefas();
-                    novaTarefaInput.value = '';
-                    atualizarNumerosOrdem();
-                }
-            }
+      adicionarTarefaBtn.addEventListener('click', adicionarTarefaInput);
+      exportarTarefasBtn.addEventListener('click', exportarTarefas);
 
-            function adicionarTarefa(tarefa, concluida, dataConclusao, observacao) {
-                const li = document.createElement('li');
-                li.className = 'handle';
-                li.innerHTML = `
+      novaTarefaInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          adicionarTarefaInput();
+        }
+      });
+
+      carregarTarefasFixasCheckbox.addEventListener('change', function () {
+        localStorage.removeItem('tarefasFixasCarregadas'); // Remove a flag ao desmarcar o checkbox
+        if (this.checked) {
+          carregarTarefasFixas(); // Adiciona tarefas mensais fixas
+          localStorage.setItem('tarefasFixasCarregadas', 'true');
+        }
+      });
+
+      const sortable = new Sortable(listaTarefas, {
+        animation: 150,
+        handle: '.handle',
+        onEnd: function (evt) {
+          salvarTarefas();
+          atualizarNumerosOrdem();
+        },
+      });
+
+      function carregarTarefasFixas() {
+        const tarefasFixas = [
+          "Contabilização NF e Rateio",
+          "2012698-_NF CONSIGNADO BB",
+          "2019054-_NF CONSIGNADO CREDITAS",
+          "2017004-_NF DROGARIA SÃO PAULO - TMF",
+          "5000000-_NF FGTS",
+          "2017039-_NF MARES FRETADO",
+          "2005901-_NF MENSALIDADE SINDICATO SP",
+          "2017458-_NF NEO TAGUS BA",
+          "2007872-_NF NEO TAGUS SP",
+          "2016384-_NF NOTREDAME COPAY - TMF",
+          "2016384-_NF NOTREDAME MENSAL - TMF",
+          "2011857-_NF ODONTO - TMF",
+          "2011116 -_NF OMINT MENSAL - TMF",
+          "2001582-_NF PROMEDICA COPAY - TMF",
+          "2005947-_NF SINDICATO PATRONAL BA",
+          "2012440-_NF ALELO ALIMENTAÇÃO - TMF",
+          "2012440-_NF ALELO ALIMENTAÇÃO 13SAL BA - TMF",
+          "2012440-_NF ALELO ALIMENTAÇÃO SPOT - TMF",
+          "2012440-_NF ALELO PREMIACAO BA - TMF",
+          "2012440-_NF ALELO REFEIÇÃO - TMF",
+          "2012440-_NF ALELO REFEIÇÃO PJ - TMF",
+          "2012440-_NF ALELO TRANSPORTES VT - TMF",
+          "2018208-_NF NEXTI PONTO",
+          "2019127-_NF RECRUTA.AI",
+          "2017729-_NF SEGURO VIDA BB - TMF",
+          "2019950-_NF CARTÃO CAJU - TMF",
+          "2018057-_NF ACTIVA CRACHÁ",
+          "2019926-_NF ALEXANDRE REIS",
+          "2008443-_NF CIA POOL FRETADO",
+          "2017657 -_NF NEXUS CONFERENCIA",
+          "2019765-_NF NOVISA FRETADO",
+          "2000810-_NF NUBE",
+          "2010931-_NF PEOPLE TO PEOPLE",
+          "2018335-_NF PJ ADRIANO NUCCI",
+          "2019547-_NF PJ FELIPE MOTA",
+          "2018334-_NF PJ LIZARELLI",
+          "2019899-_NF PJ LUIZ GUSTAVO",
+          "2019793 -_NF PJ MARCELO ALMEIDA",
+          "2001438 -_NF SAPORE BA - TMF",
+          "2000493-_NF SAPORE SP - TMF",
+          "2018116 -_NF TMF"
+
+        ];
+
+        tarefasFixas.forEach(tarefa => adicionarTarefa(tarefa, false, '', ''));
+      }
+
+      function adicionarTarefaInput() {
+        const tarefa = novaTarefaInput.value;
+        if (tarefa) {
+          adicionarTarefa(tarefa, false, '', '');
+          salvarTarefas();
+          novaTarefaInput.value = '';
+          atualizarNumerosOrdem();
+        }
+      }
+
+      function adicionarTarefa(tarefa, concluida, dataConclusao, observacao) {
+        const li = document.createElement('li');
+        li.className = 'handle';
+        li.innerHTML = `
                     <span class="ordem"></span>
                     <input type="checkbox" class="tarefa-checkbox" ${concluida ? 'checked' : ''}> 
                     <span class="texto-tarefa">${tarefa}</span>
@@ -283,98 +287,157 @@
                     <input type="date" class="data-conclusao" ${concluida ? '' : 'hidden'}>
                     <input type="text" class="observacao" placeholder="Observação" ${concluida ? '' : 'hidden'}>
                 `;
-                const dataConclusaoInput = li.querySelector('.data-conclusao');
-                const observacaoInput = li.querySelector('.observacao');
+        const dataConclusaoInput = li.querySelector('.data-conclusao');
+        const observacaoInput = li.querySelector('.observacao');
+        if (concluida) {
+          dataConclusaoInput.hidden = false;
+          observacaoInput.hidden = false;
+          dataConclusaoInput.value = dataConclusao;
+          observacaoInput.value = observacao;
+        }
 
-                listaTarefas.appendChild(li);
+        listaTarefas.appendChild(li);
 
-                li.querySelector('.excluir-tarefa').addEventListener('click', function () {
-                    li.remove();
-                    salvarTarefas();
-                    atualizarNumerosOrdem();
-                });
-
-                li.querySelector('.tarefa-checkbox').addEventListener('change', function () {
-                    if (this.checked) {
-                        dataConclusaoInput.hidden = false;
-                        observacaoInput.hidden = false;
-                        dataConclusaoInput.value = new Date().toISOString().split('T')[0];
-                    } else {
-                        dataConclusaoInput.hidden = true;
-                        observacaoInput.hidden = true;
-                    }
-                    salvarTarefas();
-                });
-
-                observacaoInput.addEventListener('input', function () {
-                    salvarTarefas();
-                });
-
-                atualizarNumerosOrdem();
-            }
-
-            function salvarTarefas() {
-                const tarefas = [];
-                listaTarefas.querySelectorAll('li').forEach((li, index) => {
-                    tarefas.push({
-                        texto: li.querySelector('.texto-tarefa').textContent,
-                        concluida: li.querySelector('.tarefa-checkbox').checked,
-                        dataConclusao: li.querySelector('.data-conclusao').value,
-                        observacao: li.querySelector('.observacao').value,
-                        ordem: index + 1,
-                    });
-                });
-                localStorage.setItem('tarefas', JSON.stringify(tarefas));
-            }
-
-            function carregarTarefas() {
-                const tarefasSalvas = JSON.parse(localStorage.getItem('tarefas'));
-                if (tarefasSalvas) {
-                    tarefasSalvas.forEach(tarefa => {
-                        adicionarTarefa(tarefa.texto, tarefa.concluida, tarefa.dataConclusao, tarefa.observacao);
-                    });
-                }
-            }
-
-            function atualizarNumerosOrdem() {
-                listaTarefas.querySelectorAll('.ordem').forEach((element, index) => {
-                    element.textContent = `✔ ${index + 1} - `;
-                });
-            }
-
-
-            function exportarTarefas() {
-                const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
-                let conteudoTexto = tarefas.map(tarefa =>
-                    `Ordem: ${tarefa.ordem}\nTarefa: ${tarefa.texto}\nConcluída: ${tarefa.concluida ? 'Sim' : 'Não'}\nData de Conclusão: ${tarefa.dataConclusao}\nObservação: ${tarefa.observacao}`
-                ).join('\n\n');
-
-                const elemento = document.createElement('a');
-                elemento.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(conteudoTexto));
-                elemento.setAttribute('download', 'tarefas.txt');
-
-                elemento.style.display = 'none';
-                document.body.appendChild(elemento);
-
-                elemento.click();
-
-                document.body.removeChild(elemento);
-            }
-
-            const excluirTodasTarefasBtn = document.getElementById('excluirTodasTarefasBtn');
-            excluirTodasTarefasBtn.addEventListener('click', excluirTodasTarefas);
-
-            function excluirTodasTarefas() {
-                const confirmacao = confirm("Tem certeza de que deseja excluir todas as tarefas?");
-                if (confirmacao) {
-                    listaTarefas.innerHTML = ''; // Remove todos os elementos filhos da lista
-                    salvarTarefas(); // Atualiza o armazenamento local após a exclusão
-                    atualizarNumerosOrdem();
-                }
-            }
-
+        li.querySelector('.excluir-tarefa').addEventListener('click', function () {
+          li.remove();
+          salvarTarefas();
+          atualizarNumerosOrdem();
         });
-    </script>
+
+        li.querySelector('.tarefa-checkbox').addEventListener('change', function () {
+          if (this.checked) {
+            dataConclusaoInput.hidden = false;
+            observacaoInput.hidden = false;
+            dataConclusaoInput.value = new Date().toISOString().split('T')[0];
+          } else {
+            dataConclusaoInput.hidden = true;
+            observacaoInput.hidden = true;
+          }
+          salvarTarefas();
+        });
+
+        observacaoInput.addEventListener('input', function () {
+          salvarTarefas();
+        });
+
+        atualizarNumerosOrdem();
+      }
+
+      function salvarTarefas() {
+        const tarefas = [];
+        listaTarefas.querySelectorAll('li').forEach((li, index) => {
+          tarefas.push({
+            texto: li.querySelector('.texto-tarefa').textContent,
+            concluida: li.querySelector('.tarefa-checkbox').checked,
+            dataConclusao: li.querySelector('.data-conclusao').value,
+            observacao: li.querySelector('.observacao').value,
+            ordem: index + 1,
+          });
+        });
+        localStorage.setItem('tarefas', JSON.stringify(tarefas));
+      }
+
+      function carregarTarefas() {
+        const tarefasSalvas = JSON.parse(localStorage.getItem('tarefas'));
+        if (tarefasSalvas) {
+          tarefasSalvas.forEach(tarefa => {
+            adicionarTarefa(tarefa.texto, tarefa.concluida, tarefa.dataConclusao, tarefa.observacao);
+          });
+        }
+      }
+
+
+      function atualizarNumerosOrdem() {
+        listaTarefas.querySelectorAll('.ordem').forEach((element, index) => {
+          element.textContent = `✔ ${index + 1} - `;
+        });
+      }
+
+
+      function exportarTarefas() {
+        const tarefas = [];
+        listaTarefas.querySelectorAll('li').forEach((li, index) => {
+          tarefas.push({
+            ordem: index + 1,
+            texto: li.querySelector('.texto-tarefa').textContent,
+            concluida: li.querySelector('.tarefa-checkbox').checked,
+            dataConclusao: li.querySelector('.data-conclusao').value,
+            observacao: li.querySelector('.observacao').value,
+          });
+        });
+
+        const conteudoTexto = JSON.stringify(tarefas, null, 2);
+
+        const elemento = document.createElement('a');
+        elemento.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(conteudoTexto));
+        elemento.setAttribute('download', 'tarefas.txt');
+
+        elemento.style.display = 'none';
+        document.body.appendChild(elemento);
+
+        elemento.click();
+
+        document.body.removeChild(elemento);
+      }
+
+      const excluirTodasTarefasBtn = document.getElementById('excluirTodasTarefasBtn');
+      excluirTodasTarefasBtn.addEventListener('click', excluirTodasTarefas);
+
+      function excluirTodasTarefas() {
+        const confirmacao = confirm("Tem certeza de que deseja excluir todas as tarefas?");
+        if (confirmacao) {
+          listaTarefas.innerHTML = ''; // Remove todos os elementos filhos da lista
+          salvarTarefas(); // Atualiza o armazenamento local após a exclusão
+          atualizarNumerosOrdem();
+        }
+      }
+
+      const importarTarefasBtn = document.getElementById('importarTarefasBtn');
+      importarTarefasBtn.addEventListener('click', importarTarefas);
+
+      function importarTarefas() {
+        const inputElement = document.createElement('input');
+        inputElement.type = 'file';
+        inputElement.accept = '.txt';
+
+        inputElement.addEventListener('change', function () {
+          const file = inputElement.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const conteudoTexto = e.target.result;
+              try {
+                const tarefasImportadas = JSON.parse(conteudoTexto);
+                if (Array.isArray(tarefasImportadas)) {
+                  // Limpa a lista atual antes de importar as novas tarefas
+                  listaTarefas.innerHTML = '';
+                  // Adiciona as tarefas importadas à lista
+                  tarefasImportadas.forEach(tarefa => {
+                    adicionarTarefa(tarefa.texto, tarefa.concluida, tarefa.dataConclusao, tarefa.observacao);
+                  });
+                  // Salva as tarefas após a importação
+                  salvarTarefas();
+                  // Atualiza a ordem das tarefas na lista
+                  atualizarNumerosOrdem();
+                  alert('Tarefas importadas com sucesso!');
+                } else {
+                  alert('O arquivo não contém um formato de tarefas válido.');
+                }
+              } catch (error) {
+                alert('Erro ao importar as tarefas. Certifique-se de que o arquivo está no formato correto.');
+              }
+            };
+            reader.readAsText(file);
+          }
+        });
+
+        // Simula um clique no elemento de input de arquivo
+        inputElement.click();
+      }
+
+
+    });
+  </script>
 </body>
 
 </html>
